@@ -1,4 +1,4 @@
-# Standard
+﻿# Standard
 
 All points should be made using the `Point` class in `point.py`. Points are ordered by their index in a list of `n` points. A solution should be a permutation of numbers from `0` to `n - 1`.
 
@@ -41,7 +41,7 @@ A sample simulated annealing algorithm containing three mutations:
 
 It has hardcoded parameters that solve an instance of TSP with a random uniform distribution of 100 points in under 30 seconds on a modern computer.
 
-Make sure `gui.py` is included in the directory.
+Make sure `gui.py` and `point.py` are included in the directory.
 
 ### Usage
 
