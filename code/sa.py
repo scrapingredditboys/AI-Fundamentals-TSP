@@ -1,6 +1,8 @@
 import random as r
 import gui
 import point
+import tspio
+import sys
 
 E = 2.71828
 
@@ -10,10 +12,12 @@ class SA:
         self.TEMP_END = 0.2
         self.COOLING = 0.98
         self.ITERS = 1000
-        self.POINTS = 100
-        self.points = self.generatePoints()
+        self.path = sys.argv[1]
+        
+        self.points = tspio.readProblem(self.path)
+        self.POINTS = len(self.points)
         self.matrix = self.generateDistanceMatrix()
-        self.gui = gui.GUI()
+        self.gui = gui.GUI(self.points)
         self.anneal()
         
     def generatePoints(self):
@@ -55,8 +59,9 @@ class SA:
                     bestDistance = newDistance
                     bestSolution = newSolution[:]
             print("Temparature: " + str(temp) + "      Best distance: " + str(bestDistance)) 
-            self.gui.draw(self.points, bestSolution)
+            self.gui.draw(bestSolution)
             self.gui.update()
+        tspio.writeSolution(bestSolution, self.path)
         input("Finished! Press Enter to continue...")
             
     def mutate(self, solution):
