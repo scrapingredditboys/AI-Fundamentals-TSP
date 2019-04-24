@@ -18,13 +18,13 @@ class SA:
         
         self.gui = gui
         
-    def start(self, start_temp, end_temp, cooling, iters):
+    def start(self, start_temp, end_temp, cooling, iters, cs):
         self.TEMP_START = start_temp
         self.TEMP_END = end_temp
         self.COOLING = cooling
         self.ITERS = iters
         
-        self.anneal()
+        self.anneal(cs)
         
     def generatePoints(self):
         pts = []
@@ -43,7 +43,7 @@ class SA:
             matrix.append(distances)
         return matrix
             
-    def anneal(self):
+    def anneal(self, cs):
         bestSolution = list(range(self.POINTS))
         bestDistance = self.calculateTotalDistance(bestSolution)
         temp = self.TEMP_START
@@ -53,7 +53,7 @@ class SA:
             distance = bestDistance
             for i in range(self.ITERS):
                 newSolution = solution[:]
-                self.mutate(newSolution)
+                self.mutate(newSolution, cs)
                 newDistance = self.calculateTotalDistance(newSolution)
                 if(newDistance < distance):
                     distance = newDistance
@@ -70,22 +70,36 @@ class SA:
         tspio.writeSolution(bestSolution, self.path)
         print("Finished!\n\n")
             
-    def mutate(self, solution):
+    def mutate(self, solution, cs):
         index1 = r.randint(0, len(solution) - 1) #Select 2 random points
         index2 = r.randint(0, len(solution) - 1)
         if(index1 > index2):
             index1, index2 = index2, index1
-        type = r.randint(0, 2)
-        if(type == 0): #Swap the points
-            temp = solution[index1]
-            solution[index1] = solution[index2]
-            solution[index2] = temp
-        elif(type == 1): #Insert a point elsewhere in the path
-            solution.insert(index1, solution.pop(index2))
-        elif(type == 2): #reverse a subpath
-            temp = solution[index1:index2]
-            temp.reverse()
-            solution[index1:index2] = temp
+            
+        mutations = self.getMutations(cs)
+            
+        type = r.randint(0, len(mutations) - 1)
+        mutations[type](solution, index1, index2)
+            
+    def getMutations(self, cs):
+        funcs = [self.swapPoints, self.insertPoint, self.reverseSubpath]
+        valid = []
+        for i in range(len(funcs)):
+            if(cs[i] == 1):
+                valid.append(funcs[i])
+        return valid
+        
+    def swapPoints(self, solution, index1, index2):
+        solution[index1], solution[index2] = solution[index2], solution[index1]
+        
+    def insertPoint(self, solution, index1, index2):
+        solution.insert(index1, solution.pop(index2))
+
+    def reverseSubpath(self, solution, index1, index2):
+        temp = solution[index1:index2]
+        temp.reverse()
+        solution[index1:index2] = temp
+
                 
     def calculateTotalDistance(self, solution):
         distance = 0

@@ -4,7 +4,7 @@ class Params(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self)
         self.title('TSP')
-        self.geometry('200x150')
+        self.geometry('200x200')
         self.parent = parent
         
         tk.Label(self, text="Starting temperature").grid(row=0, column=0)
@@ -31,9 +31,23 @@ class Params(tk.Toplevel):
         self.iters.insert(0, 1000)
         self.iters.grid(row=3, column=1)
         
-        tk.Button(self, text="Start", command=self.start).grid(row=4, column=0)
+        self.c1 = tk.IntVar(value=1)
+        self.c2 = tk.IntVar(value=1)
+        self.c3 = tk.IntVar(value=1)
+        
+        tk.Label(self, text="Swap 2 points").grid(row=4, column=0)
+        tk.Checkbutton(self, variable=self.c1).grid(row=4, column=1)
+        
+        tk.Label(self, text="Insert point elsewhere").grid(row=5, column=0)
+        tk.Checkbutton(self, variable=self.c2).grid(row=5, column=1)
+        
+        tk.Label(self, text="Reverse subpath").grid(row=6, column=0)
+        tk.Checkbutton(self, variable=self.c3).grid(row=6, column=1)
+        
+        tk.Button(self, text="Start", command=self.start).grid(row=7, column=0)
         
     def start(self):
-        self.parent.start(float(self.start_temp.get()), float(self.end_temp.get()), float(self.cooling.get()), int(self.iters.get()))
+        cs = [self.c1.get(), self.c2.get(), self.c3.get()]
+        self.parent.start(float(self.start_temp.get()), float(self.end_temp.get()), float(self.cooling.get()), int(self.iters.get()), cs)
         
         
