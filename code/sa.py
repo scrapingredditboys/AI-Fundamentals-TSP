@@ -1,23 +1,29 @@
 import random as r
-import gui
 import point
 import tspio
-import sys
 
 E = 2.71828
 
 class SA:
-    def __init__(self):
+    def __init__(self, path, gui):
         self.TEMP_START = 100
         self.TEMP_END = 0.2
         self.COOLING = 0.98
         self.ITERS = 1000
-        self.path = sys.argv[1]
+        self.path = path
         
         self.points = tspio.readProblem(self.path)
         self.POINTS = len(self.points)
         self.matrix = self.generateDistanceMatrix()
-        self.gui = gui.GUI(self.points)
+        
+        self.gui = gui
+        
+    def start(self, start_temp, end_temp, cooling, iters):
+        self.TEMP_START = start_temp
+        self.TEMP_END = end_temp
+        self.COOLING = cooling
+        self.ITERS = iters
+        
         self.anneal()
         
     def generatePoints(self):
@@ -58,11 +64,11 @@ class SA:
                 if(newDistance < bestDistance):
                     bestDistance = newDistance
                     bestSolution = newSolution[:]
-            print("Temparature: " + str(temp) + "      Best distance: " + str(bestDistance)) 
+            print("Temparature: " + "{:0.12f}".format(temp) + "      Best distance: " + str(bestDistance)) 
             self.gui.draw(bestSolution)
             self.gui.update()
         tspio.writeSolution(bestSolution, self.path)
-        input("Finished! Press Enter to continue...")
+        print("Finished!\n\n")
             
     def mutate(self, solution):
         index1 = r.randint(0, len(solution) - 1) #Select 2 random points
@@ -88,4 +94,3 @@ class SA:
         distance += self.matrix[solution[-1]][solution[0]]
         return distance
         
-SA()

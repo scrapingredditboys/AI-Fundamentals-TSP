@@ -1,7 +1,10 @@
 import tkinter as tk
+from params import Params
+import sys
+from sa import SA
 
 class GUI(tk.Tk):
-    def __init__(self, points):
+    def __init__(self):
         tk.Tk.__init__(self)
         self.title('TSP')
         self.geometry('550x550')
@@ -9,10 +12,15 @@ class GUI(tk.Tk):
         self.CIRCLE_RADIUS = 2
         self.canvas = tk.Canvas(self, width=self.SIZE, height=self.SIZE)
         self.canvas.pack()
-        self.points = points
+        
+        self.sa = SA(sys.argv[1], self)
+        self.points = self.sa.points
+        
         self.offsetX = self.getOffsetX()
         self.offsetY = self.getOffsetY()
         self.norm = self.getNormalizationFactor()
+        
+        Params(self.sa)
         
     def draw(self, solution):
         self.canvas.delete("all")
@@ -56,3 +64,6 @@ class GUI(tk.Tk):
         for i in range(len(self.points)):
             ys.append(self.points[i].y)
         return min(ys)
+        
+gui = GUI()
+gui.mainloop()
