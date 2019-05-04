@@ -1,6 +1,7 @@
 import random as r
 import point
 import tspio
+from params import Params
 
 E = 2.71828
 
@@ -18,12 +19,15 @@ class SA:
         
         self.gui = gui
         
+        self.params = Params(self)
+        
     def start(self, start_temp, end_temp, cooling, iters, cs):
         self.TEMP_START = start_temp
         self.TEMP_END = end_temp
         self.COOLING = cooling
         self.ITERS = iters
         
+        self.params.destroy()
         self.anneal(cs)
         
     def generatePoints(self):
@@ -47,6 +51,8 @@ class SA:
         bestSolution = list(range(self.POINTS))
         bestDistance = self.calculateTotalDistance(bestSolution)
         temp = self.TEMP_START
+        temps = []
+        dists = []
         while(temp > self.TEMP_END):
             temp *= self.COOLING
             solution = bestSolution[:]
@@ -65,9 +71,12 @@ class SA:
                     bestDistance = newDistance
                     bestSolution = newSolution[:]
             print("Temparature: " + "{:0.12f}".format(temp) + "      Best distance: " + str(bestDistance)) 
+            temps.append(temp)
+            dists.append(bestDistance)
             self.gui.draw(bestSolution)
             self.gui.update()
         tspio.writeSolution(bestSolution, self.path)
+        tspio.writeData(temps, dists, self.path)
         print("Finished!\n\n")
             
     def mutate(self, solution, cs):

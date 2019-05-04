@@ -1,12 +1,11 @@
 import tkinter as tk
-from params import Params
 import sys
 from sa import SA
 
 class GUI(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.title('TSP')
+        self.title('World Traveller')
         self.geometry('550x550')
         self.SIZE = 500
         self.CIRCLE_RADIUS = 2
@@ -19,8 +18,6 @@ class GUI(tk.Tk):
         self.offsetX = self.getOffsetX()
         self.offsetY = self.getOffsetY()
         self.norm = self.getNormalizationFactor()
-        
-        Params(self.sa)
         
     def draw(self, solution):
         self.canvas.delete("all")

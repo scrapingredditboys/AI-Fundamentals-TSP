@@ -1,4 +1,5 @@
 import point
+from pandas import DataFrame
 
 def readProblem(path):
     file = open(path, "r")
@@ -22,3 +23,17 @@ def writeSolution(solution, path):
 def readSolution(path):
     file = open(path, "r")
     return list(map(int, file.read().split(' ')))
+    
+def writeData(temps, dists, path):
+    data = {
+        'Temperature': temps,
+        'Distance': dists
+    }
+    
+    df = DataFrame(data, columns = ['Temperature', 'Distance'])
+    
+    parts = path.split('.')
+    parts[0] += 'Data'
+    path = parts[0] + '.csv'
+    
+    df.to_csv(path)

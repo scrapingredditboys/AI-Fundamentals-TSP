@@ -3,8 +3,10 @@ import tkinter as tk
 class Params(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self)
-        self.title('TSP')
-        self.geometry('200x200')
+        self.title('Parameter input')
+        self.geometry('200x320')
+        self.lift()
+        self.attributes("-topmost", True)
         self.parent = parent
         
         tk.Label(self, text="Starting temperature").grid(row=0, column=0)
@@ -45,6 +47,12 @@ class Params(tk.Toplevel):
         tk.Checkbutton(self, variable=self.c3).grid(row=6, column=1)
         
         tk.Button(self, text="Start", command=self.start).grid(row=7, column=0)
+        
+        tk.Label(self, text="Made by:").grid(row=8, column=0)
+        tk.Label(self, text="Kacper Leszczyński").grid(row=9, column=0)
+        tk.Label(self, text="Bartłomiej Szymański").grid(row=10, column=0)
+        tk.Label(self, text="Youssef Ibrahim").grid(row=11, column=0)
+        tk.Label(self, text="Kamil Czerniak").grid(row=12, column=0)
         
     def start(self):
         cs = [self.c1.get(), self.c2.get(), self.c3.get()]
