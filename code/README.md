@@ -45,4 +45,4 @@ Make sure `gui.py` and `point.py` are included in the directory.
 
 ### Usage
 
-`python sa.py`
+`python gui.py <Name of a file in .TSP format>`
