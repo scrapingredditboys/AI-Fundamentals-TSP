@@ -17,7 +17,7 @@ class GUI(tk.Tk):
         self.points = tspio.readProblem(sys.argv[1])
 
         # creates an ant algorithm instance
-        ants = anttsp.Ants(points=self.points, num_ants=20, num_iterations=12, num_repetitions=1, gui=self)
+        ants = anttsp.Ants(points=self.points, num_ants=20, num_iterations=12, num_repetitions=1, alpha = 0.1, beta=1, q0=0.5, rho=1, gui=self)
         #pso = PSO(graph, iterations=10, size_population=1000, beta=0.5, alpha=0.5, gui = self)
         
         self.offsetX = self.getOffsetX()
