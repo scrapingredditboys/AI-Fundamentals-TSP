@@ -69,8 +69,8 @@ class AntColony:
         lock = Lock()
         lock.acquire()
 
-        outfile = open("results_ants-{0}_iters-{1}_alpha-{2}.csv".format(self.num_ants, 
-            self.num_iterations, self.Alpha), "a")
+        outfile = open("results_ants-{0}_iters-{1}_alpha-{2}_beta-{3}_q0-{4}_rho-{5}.csv".format(self.num_ants, 
+            self.num_iterations, self.Alpha, self.beta, self.q0, self.rho), "a")
 
         print ("Update called by %s" % (ant.ID,))
         self.ant_counter += 1
