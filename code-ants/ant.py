@@ -4,7 +4,7 @@ import sys
 from threading import *
 
 class Ant(Thread):
-    def __init__(self, ID, start_node, colony, beta = 1, q0 = 0.5, rho = 0.99):
+    def __init__(self, ID, start_node, colony, beta, q0, rho):
         Thread.__init__(self)
         self.ID = ID
         self.start_node = start_node
@@ -62,7 +62,7 @@ class Ant(Thread):
         print ("Ant thread %s terminating." % (self.ID,))
 
         # allows thread to be restarted (calls Thread.__init__)
-        self.__init__(self.ID, self.start_node, self.colony)
+        self.__init__(ID=self.ID, start_node=self.start_node, colony=self.colony, beta=self.Beta, q0=self.Q0, rho=self.Rho)
 
     def end(self):
         return not self.nodes_to_visit 

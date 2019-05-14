@@ -5,8 +5,8 @@ import random
 import sys
 
 class AntColony:
-    def __init__(self, graph, num_ants, num_iterations, alpha = 0.1, 
-        beta=1, q0=0.5, rho=0.99, gui = None):
+    def __init__(self, graph, num_ants, num_iterations, alpha, 
+        beta, q0, rho, gui = None):
         self.graph = graph
         self.num_ants = num_ants
         self.num_iterations = num_iterations
@@ -102,8 +102,8 @@ class AntColony:
         self.reset()
         ants = []
         for i in range(0, self.num_ants):
-            ant = Ant(i, random.randint(0, self.graph.num_nodes - 1), self, 
-                self.beta, self.q0, self.rho)
+            ant = Ant(ID=i, start_node=random.randint(0, self.graph.num_nodes - 1), colony=self, 
+                beta=self.beta, q0=self.q0, rho=self.rho)
             ants.append(ant)
         
         return ants

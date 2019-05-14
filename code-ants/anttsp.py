@@ -12,8 +12,8 @@ num_nodes = 10
 #if __name__ == "__main__":  
 
 class Ants:
-    def __init__(self, points=None, num_ants=20, num_iterations=12, num_repetitions=1, 
-        alpha = 0.1, beta = 1, q0 = 0.5, rho = 0.99, gui=None):
+    def __init__(self, points, num_ants, num_iterations, num_repetitions, 
+        alpha, beta, q0, rho, gui):
         self.points = points
         self.num_ants = num_ants
         self.num_iterations = num_iterations
@@ -62,7 +62,7 @@ class Ants:
         
     def start(self, ants, iterations, executions, alpha, beta, q0, rho):
         self.params.destroy()
-        self.__init__(self.points, num_ants=ants, num_iterations=iterations, 
+        self.__init__(points=self.points, num_ants=ants, num_iterations=iterations, 
             num_repetitions=executions, alpha = alpha, beta = beta,
             q0 = q0, rho = rho, gui=self.gui)
         self.params.destroy()
