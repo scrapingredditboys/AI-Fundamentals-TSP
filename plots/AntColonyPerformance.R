@@ -14,6 +14,21 @@ pka379ant13 <- read_csv("results_ants-13_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho
 pka379ant15 <- read_csv("results_ants-15_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
                         col_names = FALSE)
 
+xql662ant3 <- read_csv("xql662_results_ants-3_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                       col_names = FALSE)
+xql662ant5 <- read_csv("xql662_results_ants-5_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                       col_names = FALSE)
+xql662ant7 <- read_csv("xql662_results_ants-7_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                       col_names = FALSE)
+xql662ant9 <- read_csv("xql662_results_ants-9_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                       col_names = FALSE)
+xql662ant11 <- read_csv("xql662_results_ants-11_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                        col_names = FALSE)
+xql662ant13 <- read_csv("xql662_results_ants-13_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                        col_names = FALSE)
+xql662ant15 <- read_csv("xql662_results_ants-15_iters-50_alpha-0.5_beta-12.0_q0-0.3_rho-0.6.csv", 
+                        col_names = FALSE)
+
 colors <- c("blue", "green", "red", "yellow", "grey", "magenta3")
 
 plottingFunction<-function(nameOfTheFile) {
@@ -48,3 +63,4 @@ plottingFunction<-function(nameOfTheFile) {
 }
 
 plottingFunction("pka379")
+plottingFunction("xql662")
