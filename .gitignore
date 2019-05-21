@@ -1,4 +1,8 @@
 code/__pycache__
+code-merge/__pycache__
+code-pso/__pycache__
+code-ants/__pycache__
+code-genetic/__pycache__
 *.tsp
 *.txt
 *.csv
