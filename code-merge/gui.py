@@ -1,9 +1,9 @@
 import tkinter as tk
 from sa import SA
-from tsp_pso import CompleteGraph, PSO
+#from tsp_pso import CompleteGraph, PSO
 import tspio
 import anttsp
-from Travelling_Genetic import GA
+#from Travelling_Genetic import GA
 
 class GUI(tk.Tk):
     def __init__(self, algorithmType, path):
@@ -20,18 +20,18 @@ class GUI(tk.Tk):
         if(algorithmType == 'sa'):
             sa = SA(path, self)
             self.points = sa.points
-        elif(algorithmType == 'pso'):
-            self.points = tspio.readProblem(path)
-            graph = CompleteGraph(amount_vertices=len(self.points))
-            graph.vertices = list(self.points)
-            graph.generates()
-            pso = PSO(graph, iterations=10, size_population=1000, beta=0.5, alpha=0.5, gui = self)
+        #elif(algorithmType == 'pso'):
+        #    self.points = tspio.readProblem(path)
+        #    graph = CompleteGraph(amount_vertices=len(self.points))
+        #    graph.vertices = list(self.points)
+        #    graph.generates()
+        #    pso = PSO(graph, iterations=10, size_population=1000, beta=0.5, alpha=0.5, gui = self)
         elif(algorithmType == 'ac'):
             self.points = tspio.readProblem(path)
             ants = anttsp.Ants(points=self.points, num_ants=20, num_iterations=12, num_repetitions=1, alpha = 0.1, beta=1, q0=0.5, rho=1, gui=self)
-        elif(algorithmType == 'ga'):
-            ga = GA(path, self)
-            self.points = ga.cities
+        #elif(algorithmType == 'ga'):
+        #    ga = GA(path, self)
+        #    self.points = ga.cities
         
         self.offsetX = self.getOffsetX()
         self.offsetY = self.getOffsetY()

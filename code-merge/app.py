@@ -42,22 +42,22 @@ class App(tk.Tk):
         if(self.buttons == False):
             tk.Label(self.frame_left, text='Please select an algorithm to run').pack(pady=4)
             tk.Button(self.frame_left, text='Simulated Annealing', command=self.sa, width=25).pack(pady=4)
-            tk.Button(self.frame_left, text='Particle Swarm Optimization', command=self.pso, width=25).pack(pady=4)
+            #tk.Button(self.frame_left, text='Particle Swarm Optimization', command=self.pso, width=25).pack(pady=4)
             tk.Button(self.frame_left, text='Ant Colony', command=self.ac, width=25).pack(pady=4)
-            tk.Button(self.frame_left, text='Genetic', command=self.ga, width=25).pack(pady=4)
+            #tk.Button(self.frame_left, text='Genetic', command=self.ga, width=25).pack(pady=4)
             self.buttons = True
         
     def sa(self):
         GUI('sa', self.path)
         
-    def pso(self):
-        GUI('pso', self.path)
+    #def pso(self):
+    #    GUI('pso', self.path)
         
     def ac(self):
         GUI('ac', self.path)
         
-    def ga(self):
-        GUI('ga', self.path)
+    #def ga(self):
+    #    GUI('ga', self.path)
         
 app = App()
 app.mainloop()
